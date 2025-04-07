@@ -1,0 +1,97 @@
+# model_repository/opt/config.pbtxt
+name: "opt"
+backend: "vllm"
+max_batch_size: 4
+
+input [
+  {
+    name: "text_input"
+    data_type: TYPE_STRING
+    dims: [ 1 ]
+  },
+  {
+    name: "max_tokens"
+    data_type: TYPE_INT32
+    dims: [ 1 ]
+    optional: true
+  },
+  {
+    name: "bad_words"
+    data_type: TYPE_STRING
+    dims: [ 1 ]
+    optional: true
+  },
+  {
+    name: "stop_words"
+    data_type: TYPE_STRING
+    dims: [ 1 ]
+    optional: true
+  },
+  {
+    name: "temperature"
+    data_type: TYPE_FP32
+    dims: [ 1 ]
+    optional: true
+  },
+  {
+    name: "top_p"
+    data_type: TYPE_FP32
+    dims: [ 1 ]
+    optional: true
+  },
+  {
+    name: "frequency_penalty"
+    data_type: TYPE_FP32
+    dims: [ 1 ]
+    optional: true
+  },
+  {
+    name: "presence_penalty"
+    data_type: TYPE_FP32
+    dims: [ 1 ]
+    optional: true
+  }
+]
+
+output [
+  {
+    name: "text_output"
+    data_type: TYPE_STRING
+    dims: [ 1 ]
+  }
+]
+
+instance_group [
+  {
+    kind: KIND_CPU
+    count: 1
+  }
+]
+
+parameters {
+  key: "model_name"
+  value: {
+    string_value: "facebook/opt-125m"
+  }
+}
+
+parameters {
+  key: "dtype"
+  value: {
+    string_value: "float32"  # Use float32 for CPU-only deployment
+  }
+}
+
+parameters {
+  key: "disable_log_requests"
+  value: {
+    string_value: "false"
+  }
+}
+
+parameters {
+  key: "max_model_len"
+  value: {
+    string_value: "2048"
+  }
+}
