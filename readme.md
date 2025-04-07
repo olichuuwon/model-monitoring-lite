@@ -151,3 +151,5 @@ If you encounter issues:
 - [vLLM Documentation](https://docs.vllm.ai/)
 - [Triton vLLM Backend](https://github.com/triton-inference-server/vllm_backend)
 - [OPT Model Documentation](https://huggingface.co/facebook/opt-125m)
+
+needa use gpu ~ from online ~

@@ -14,13 +14,15 @@ services:
       - ./model_repository:/models
     environment:
       - PYTHONUNBUFFERED=1
+      - CUDA_VISIBLE_DEVICES=""
+      - VLLM_TARGET_DEVICE=cpu
     command: [
         "tritonserver",
         "--model-repository=/models",
         "--allow-metrics=true",
         "--metrics-interval-ms=1000",
         "--log-verbose=1",
-        "--cpu-only=1", # Force CPU-only mode
+        # "--cpu-only=1", # Force CPU-only mode
       ]
     networks:
       - monitoring_network
